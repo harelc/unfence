@@ -250,16 +250,32 @@ a { color: inherit; }
 /* ===== Security ===== */
 .security { background: var(--stone); }
 .security-visual {
+  margin: 0;
   height: 100%;
   min-height: 320px;
   background: var(--charcoal-2);
   border-radius: var(--radius);
   overflow: hidden;
   position: relative;
+  box-shadow: var(--shadow);
 }
-.bars {
-  position: absolute; inset: 0;
-  background-image: repeating-linear-gradient(90deg, rgba(224,98,31,0.9) 0 8px, transparent 8px 42px);
+.security-visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  object-fit: cover;
+  filter: saturate(0.85) contrast(1.05);
+}
+.security-visual figcaption {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  padding: 16px 20px;
+  background: linear-gradient(0deg, rgba(20,18,14,0.92), rgba(20,18,14,0));
+  color: var(--paper);
+  font-size: 0.82rem;
+  opacity: 0.9;
 }
 .security em { color: var(--amber); font-style: normal; font-weight: 700; }
 
