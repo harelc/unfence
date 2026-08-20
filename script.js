@@ -22,7 +22,11 @@
     .catch(() => {})
 })()
 
-// ===== Petition: stats (count + recent signers) =====
+// ===== Petition: stats (count + rotating recent-signers ticker) =====
+let tickerSigners = []
+let tickerIndex = 0
+let tickerInterval = null
+
 async function loadPetitionStats() {
   try {
     const res = await fetch('/.netlify/functions/petition-stats')
@@ -33,25 +37,34 @@ async function loadPetitionStats() {
       countEl.textContent = data.count.toLocaleString('he-IL')
     }
 
-    const listEl = document.getElementById('recentSigners')
-    if (listEl && Array.isArray(data.recent)) {
-      listEl.innerHTML = data.recent
-        .map((s) => {
-          const name = escapeHtml(s.name)
-          const hood = s.neighborhood ? ` · ${escapeHtml(s.neighborhood)}` : ''
-          return `<li>${name}${hood}</li>`
-        })
-        .join('')
+    if (Array.isArray(data.recent) && data.recent.length) {
+      tickerSigners = data.recent
+      tickerIndex = 0
+      renderTickerFrame()
+      if (!tickerInterval) {
+        tickerInterval = setInterval(() => {
+          tickerIndex = (tickerIndex + 1) % tickerSigners.length
+          renderTickerFrame()
+        }, 3200)
+      }
     }
   } catch {
-    // fail silently — counter just stays at placeholder
+    // fail silently — counter/ticker just stay at placeholder
   }
 }
 
-function escapeHtml(str) {
-  const div = document.createElement('div')
-  div.textContent = str ?? ''
-  return div.innerHTML
+function renderTickerFrame() {
+  const nameEl = document.getElementById('tickerName')
+  const metaEl = document.getElementById('tickerMeta')
+  if (!nameEl || !metaEl || !tickerSigners.length) return
+
+  const signer = tickerSigners[tickerIndex]
+  nameEl.style.animation = 'none'
+  requestAnimationFrame(() => {
+    nameEl.style.animation = ''
+  })
+  nameEl.textContent = signer.name
+  metaEl.textContent = signer.neighborhood || ''
 }
 
 loadPetitionStats()

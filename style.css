@@ -379,18 +379,68 @@ details[open] summary::after { content: "–"; }
 .act-card-title { font-family: var(--ff-display); font-size: 1.1rem; }
 .act-card-desc { font-size: 0.85rem; opacity: 0.65; }
 
+.petition-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 40px;
+  margin-top: 48px;
+  align-items: start;
+  direction: ltr; /* ticker panel forced to the visual left of the form */
+}
+.petition-layout > * { direction: rtl; }
+
+/* rotating signers ticker — sits to the visual left of the form */
+.signers-ticker {
+  background: var(--charcoal-2);
+  border: 1px solid rgba(246,241,230,0.12);
+  border-radius: var(--radius);
+  padding: 22px;
+  position: sticky;
+  top: 90px;
+}
+.signers-ticker-label {
+  font-family: var(--ff-stencil);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: var(--amber-2);
+  margin: 0 0 14px;
+}
+.signers-ticker-window {
+  min-height: 64px;
+  border-inline-start: 3px solid var(--amber);
+  padding-inline-start: 14px;
+  margin-bottom: 22px;
+}
+.signers-ticker-name {
+  font-family: var(--ff-display);
+  font-size: 1.15rem;
+  margin: 0 0 4px;
+  animation: ticker-fade 0.4s ease;
+}
+.signers-ticker-meta {
+  font-size: 0.82rem;
+  opacity: 0.65;
+  margin: 0;
+}
+@keyframes ticker-fade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .petition-counter {
   text-align: center;
-  margin: 32px 0 40px;
+  border-top: 1px solid rgba(246,241,230,0.12);
+  padding-top: 18px;
 }
 .petition-counter-num {
   display: block;
   font-family: var(--ff-stencil);
-  font-size: 3.6rem;
+  font-size: 2.6rem;
   color: var(--amber-2);
   line-height: 1;
 }
-.petition-counter-label { font-size: 0.9rem; opacity: 0.7; letter-spacing: 0.05em; }
+.petition-counter-label { font-size: 0.82rem; opacity: 0.7; letter-spacing: 0.05em; }
 
 .petition-form { display: flex; flex-direction: column; gap: 18px; margin-top: 8px; }
 .form-row { display: flex; flex-direction: column; gap: 6px; }
@@ -420,20 +470,10 @@ details[open] summary::after { content: "–"; }
 .checkbox-label { display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem; opacity: 0.85; cursor: pointer; }
 .checkbox-label input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--amber); flex-shrink: 0; }
 
-.recent-signers {
-  list-style: none;
-  margin: 32px 0 0;
-  padding: 18px 22px;
-  background: var(--charcoal-2);
-  border: 1px solid rgba(246,241,230,0.12);
-  border-radius: var(--radius);
-  font-size: 0.9rem;
-  opacity: 0.85;
-  columns: 2;
-  column-gap: 24px;
+@media (max-width: 760px) {
+  .petition-layout { grid-template-columns: 1fr; }
+  .signers-ticker { position: static; }
 }
-.recent-signers:empty { display: none; }
-.recent-signers li { padding: 4px 0; border-bottom: 1px dashed rgba(246,241,230,0.1); }
 
 /* ===== Footer ===== */
 .site-footer { padding: 28px 0; background: var(--charcoal); color: rgba(246,241,230,0.55); }

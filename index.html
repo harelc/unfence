@@ -52,7 +52,7 @@
   <!-- VIDEO -->
   <section class="section video-section" id="video">
     <div class="wrap wrap-narrow">
-      <p class="section-label center">שני דקות שמסבירות הכול</p>
+      <p class="section-label center">שש דקות שמסבירות הכול</p>
       <h2 class="center">ראו במה מדובר</h2>
       <div class="video-frame">
         <iframe
@@ -237,47 +237,56 @@
 
   <!-- PETITION -->
   <section class="section petition" id="petition">
-    <div class="wrap wrap-narrow">
+    <div class="wrap">
       <p class="section-label light center">חתמו</p>
       <h2 class="center light">עצומה: לא לגדר את גבעת רם</h2>
       <p class="act-sub center">אנחנו קוראים לעיריית ירושלים, לאוניברסיטה העברית ולנת"ע להקים צוות משימה משותף ולבחון חלופות לגידור לפני שהתוואי מבוצע בשטח.</p>
 
-      <div class="petition-counter">
-        <span class="petition-counter-num" id="petitionCount">—</span>
-        <span class="petition-counter-label">חותמים עד כה</span>
+      <div class="petition-layout">
+        <aside class="signers-ticker" aria-live="polite">
+          <p class="signers-ticker-label">חתמו לאחרונה</p>
+          <div class="signers-ticker-window">
+            <p class="signers-ticker-name" id="tickerName">—</p>
+            <p class="signers-ticker-meta" id="tickerMeta"></p>
+          </div>
+          <div class="petition-counter">
+            <span class="petition-counter-num" id="petitionCount">—</span>
+            <span class="petition-counter-label">חותמים עד כה</span>
+          </div>
+        </aside>
+
+        <div class="petition-form-col">
+          <form id="petitionForm" class="petition-form">
+            <p class="hidden-field"><label>אל תמלאו שדה זה: <input name="bot-field" autocomplete="off" tabindex="-1" /></label></p>
+
+            <div class="form-row">
+              <label for="p-name">שם מלא</label>
+              <input id="p-name" name="name" type="text" required autocomplete="name" />
+            </div>
+            <div class="form-row">
+              <label for="p-email">אימייל</label>
+              <input id="p-email" name="email" type="email" required autocomplete="email" />
+            </div>
+            <div class="form-row">
+              <label for="p-neighborhood">שכונה / זיקה לקמפוס (אופציונלי)</label>
+              <input id="p-neighborhood" name="neighborhood" type="text" placeholder="למשל: בית הכרם, סטודנט/ית, סגל" />
+            </div>
+            <div class="form-row form-row-check">
+              <label class="checkbox-label">
+                <input id="p-hide-name" name="hideName" type="checkbox" />
+                <span>לא להציג את שמי ברשימה הפומבית (החתימה עדיין תיספר)</span>
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-wide">חותם/ת על העצומה</button>
+            <p class="form-note" id="petitionError" hidden></p>
+            <p class="form-note">האימייל משמש רק לאימות ולעדכונים, ולא יפורסם. השם יוצג ברשימה הפומבית אלא אם תבחרו להסתיר אותו.</p>
+          </form>
+
+          <div id="petitionThanks" class="petition-thanks" hidden>
+            <p>תודה שחתמתם! 🙌 שתפו את הדף עם עוד אנשים — כל חתימה מקרבת שולחן עגול.</p>
+          </div>
+        </div>
       </div>
-
-      <form id="petitionForm" class="petition-form">
-        <p class="hidden-field"><label>אל תמלאו שדה זה: <input name="bot-field" autocomplete="off" tabindex="-1" /></label></p>
-
-        <div class="form-row">
-          <label for="p-name">שם מלא</label>
-          <input id="p-name" name="name" type="text" required autocomplete="name" />
-        </div>
-        <div class="form-row">
-          <label for="p-email">אימייל</label>
-          <input id="p-email" name="email" type="email" required autocomplete="email" />
-        </div>
-        <div class="form-row">
-          <label for="p-neighborhood">שכונה / זיקה לקמפוס (אופציונלי)</label>
-          <input id="p-neighborhood" name="neighborhood" type="text" placeholder="למשל: בית הכרם, סטודנט/ית, סגל" />
-        </div>
-        <div class="form-row form-row-check">
-          <label class="checkbox-label">
-            <input id="p-hide-name" name="hideName" type="checkbox" />
-            <span>לא להציג את שמי ברשימה הפומבית (החתימה עדיין תיספר)</span>
-          </label>
-        </div>
-        <button type="submit" class="btn btn-primary btn-wide">חותם/ת על העצומה</button>
-        <p class="form-note" id="petitionError" hidden></p>
-        <p class="form-note">האימייל משמש רק לאימות ולעדכונים, ולא יפורסם. השם יוצג ברשימה הפומבית אלא אם תבחרו להסתיר אותו.</p>
-      </form>
-
-      <div id="petitionThanks" class="petition-thanks" hidden>
-        <p>תודה שחתמתם! 🙌 שתפו את הדף עם עוד אנשים — כל חתימה מקרבת שולחן עגול.</p>
-      </div>
-
-      <ul id="recentSigners" class="recent-signers"></ul>
     </div>
   </section>
 
